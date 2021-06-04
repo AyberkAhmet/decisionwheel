@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class SelectedTextWidget extends StatelessWidget {
@@ -8,10 +9,15 @@ class SelectedTextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _showText
-        ? Text(
-            _child.toString().substring(6, _child.toString().length - 2).toUpperCase(),
-            style: TextStyle(fontFamily: "HelveticaComp", fontSize: 50),
-          )
+        ? AutoSizeText(
+          _child.toString().substring(6, _child.toString().length - 2).toUpperCase(),
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontFamily: "PoeNewBold",
+            fontSize: 50,
+            fontWeight: FontWeight.bold
+          ),
+        )
         : Text("");
   }
 }

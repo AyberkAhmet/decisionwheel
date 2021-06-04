@@ -23,6 +23,7 @@ class _HomePageState extends State<HomePage> {
             shrinkWrap: true,
             //mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              HomeCardWidget("SHOULD I ...?"),
               HomeCardWidget("DRINKS"),
               HomeCardWidget("FOODS"),
               HomeCardWidget("CUISINES"),

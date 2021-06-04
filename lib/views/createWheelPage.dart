@@ -188,11 +188,11 @@ class _CreateWheelPageState extends State<CreateWheelPage> {
                 padding: EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 15.0),
                 child: Container(
                   decoration: BoxDecoration(
-                    boxShadow: [BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 10,
-                      offset: Offset(0,1),
-                    )],
+                    // boxShadow: [BoxShadow(
+                    //   color: Colors.grey,
+                    //   blurRadius: 10,
+                    //   offset: Offset(0,1),
+                    // )],
                     borderRadius: BorderRadiusDirectional.circular(10),
                     color: Colors.white,
                   ),

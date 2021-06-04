@@ -17,8 +17,9 @@ class _HomeCardWidgetState extends State<HomeCardWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 80,
       decoration: BoxDecoration(
-        boxShadow: [BoxShadow(color: Colors.grey,offset: Offset(0,5),blurRadius: 20,)]
+        boxShadow: [BoxShadow(color: Colors.grey[400]!,offset: Offset(0,5),blurRadius: 20,)]
       ),
       child: Card(
         shape: RoundedRectangleBorder(
@@ -34,11 +35,18 @@ class _HomeCardWidgetState extends State<HomeCardWidget> {
                   MaterialPageRoute(builder: (context) => CreateWheelPage()),
                 );
                 break;
+                case "SHOULD I ...?":
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => WheelPage("Should I ...?", listConstants.shouldList)),
+                );
+                break;
               case "DRINKS":
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => WheelPage("What will you drink?", listConstants.foodsList)),
+                      builder: (context) => WheelPage("What will you drink?", listConstants.drinkList)),
                 );
                 break;
               case "FOODS":

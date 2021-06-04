@@ -1,8 +1,12 @@
 import 'dart:math';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:provider/provider.dart';
 import 'package:spinner/models/colorConstants.dart';
+import 'package:spinner/services/adState.dart';
 import 'package:spinner/widgets/customAppbar.dart';
 import 'package:spinner/widgets/wheelPageWidgets/selectedTextWidget.dart';
 
@@ -18,6 +22,23 @@ class WheelPage extends StatefulWidget {
 class _WheelPageState extends State<WheelPage> {
   int selected = 0;
   bool showText = false;
+  InterstitialAd? interstitialAd;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final adState = Provider.of<AdState>(context);
+    adState.initialization.then((status) {
+      setState(() {
+        interstitialAd = InterstitialAd(
+            adUnitId: adState.interstitialAdUnitId,
+            listener: adState.adListener,
+            request: AdRequest())
+          ..load();
+      });
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -27,7 +48,6 @@ class _WheelPageState extends State<WheelPage> {
   @override
   Widget build(BuildContext context) {
     ColorConstants _colorConstants = ColorConstants();
-
     return SafeArea(
       child: Scaffold(
         backgroundColor: _colorConstants.backgroundColor,
@@ -40,14 +60,26 @@ class _WheelPageState extends State<WheelPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(widget._question!),
-              SelectedTextWidget(showText, widget._itemList![selected].child),
               Expanded(
+                flex: 2,
+                child: AutoSizeText(
+                  widget._question!,
+                  style: TextStyle(fontSize: 20),
+
+                ),
+              ),
+              //Spacer(),
+              Expanded(
+                flex: 3,
+                child: SelectedTextWidget(showText, widget._itemList![selected].child),
+              ),
+              Expanded(
+                flex: 25,
                 child: Stack(
                   clipBehavior: Clip.hardEdge,
                   children: [
                     Positioned(
-                      bottom: -MediaQuery.of(context).size.width / 3,
+                      bottom: -MediaQuery.of(context).size.height * 0.2,
                       right: -100,
                       child: Center(
                         child: Container(
@@ -79,9 +111,11 @@ class _WheelPageState extends State<WheelPage> {
                                 alignment: Alignment.center,
                                 children: [
                                   FortuneWheel(
+                                    animateFirst: false,
                                     selected: selected,
                                     onAnimationEnd: () {
                                       setState(() {
+                                        interstitialAd!.show();
                                         showText = true;
                                       });
                                     },
@@ -89,8 +123,8 @@ class _WheelPageState extends State<WheelPage> {
                                       FortuneIndicator(
                                         alignment: Alignment.topCenter,
                                         child: Container(
-                                          width: 100,
-                                          height: 100,
+                                          width: 80,
+                                          height: 80,
                                           child: Image.asset("assets/indic.png"),
                                         ),
                                       ),
@@ -107,7 +141,6 @@ class _WheelPageState extends State<WheelPage> {
                                         setState(() {
                                           selected = Random().nextInt(widget._itemList!.length);
                                           showText = false;
-                                          print(MediaQuery.of(context).size.width);
                                         });
                                       },
                                     ),
