@@ -39,28 +39,28 @@ class _HomeCardWidgetState extends State<HomeCardWidget> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => WheelPage("Should I ...?", listConstants.shouldList)),
+                      builder: (context) => WheelPage("Should I ...?", listConstants.shouldList,listConstants.shouldTextList)),
                 );
                 break;
               case "DRINKS":
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => WheelPage("What will you drink?", listConstants.drinkList)),
+                      builder: (context) => WheelPage("What will you drink?", listConstants.drinkList, listConstants.drinksTextList)),
                 );
                 break;
               case "FOODS":
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => WheelPage("What will you eat?", listConstants.foodsList)),
+                      builder: (context) => WheelPage("What will you eat?", listConstants.foodsList, listConstants.foodsTextList)),
                 );
                 break;
               case "CUISINES":
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => WheelPage("Which country cuisine will you eat?", listConstants.cuisinesList)),
+                      builder: (context) => WheelPage("Which country cuisine will you eat?", listConstants.cuisinesList,listConstants.cuisineTextList)),
                 );
                 break;
               default:

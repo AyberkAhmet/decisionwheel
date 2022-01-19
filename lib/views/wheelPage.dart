@@ -8,12 +8,12 @@ import 'package:provider/provider.dart';
 import 'package:spinner/models/colorConstants.dart';
 import 'package:spinner/services/adState.dart';
 import 'package:spinner/widgets/customAppbar.dart';
-import 'package:spinner/widgets/wheelPageWidgets/selectedTextWidget.dart';
 
 class WheelPage extends StatefulWidget {
   final String? _question;
   final List<FortuneItem>? _itemList;
-  WheelPage(this._question, this._itemList);
+  final List<AutoSizeText>? _textList;
+  WheelPage(this._question, this._itemList, this._textList);
 
   @override
   _WheelPageState createState() => _WheelPageState();
@@ -48,6 +48,11 @@ class _WheelPageState extends State<WheelPage> {
   @override
   Widget build(BuildContext context) {
     ColorConstants _colorConstants = ColorConstants();
+    String selectedText = widget._itemList![selected].child.toString();
+    print(selectedText);
+    selectedText = selectedText.replaceAll("Text(\"", "");
+    selectedText = selectedText.replaceAll("\")", "");
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: _colorConstants.backgroundColor,
@@ -55,6 +60,11 @@ class _WheelPageState extends State<WheelPage> {
           preferredSize: Size.fromHeight(60),
           child: CustomAppbar(),
         ),
+
+        // PreferredSize(
+        //   preferredSize: Size.fromHeight(60),
+        //   child: CustomAppbar(),
+        // ),
         body: Container(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -65,13 +75,13 @@ class _WheelPageState extends State<WheelPage> {
                 child: AutoSizeText(
                   widget._question!,
                   style: TextStyle(fontSize: 20),
-
                 ),
               ),
               //Spacer(),
               Expanded(
                 flex: 3,
-                child: SelectedTextWidget(showText, widget._itemList![selected].child),
+                child: showText ? widget._textList![selected] : Text(""),
+                //SelectedTextWidget(showText, widget._itemList![selected].child),
               ),
               Expanded(
                 flex: 25,

@@ -7,11 +7,9 @@ class AdState {
 
   AdState(this.initialization);
 
-
-  //test ad IDs
   String get interstitialAdUnitId => Platform.isAndroid
-      ? "ca-app-pub-3940256099942544/1033173712"
-      : "ca-app-pub-3940256099942544/8691691433";
+      ? "ca-app-pub-4619250431619647/4879032176"
+      : "ca-app-pub-4619250431619647/6964767281";
 
   AdListener get adListener => _adListener;
 

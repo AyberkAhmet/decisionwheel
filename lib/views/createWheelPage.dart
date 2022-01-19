@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
 import 'package:spinner/models/colorConstants.dart';
@@ -13,8 +14,9 @@ class CreateWheelPage extends StatefulWidget {
 class _CreateWheelPageState extends State<CreateWheelPage> {
   Color? _itemColor;
   String? _question;
-  late String _itemName;
+  String? _itemName;
   List<FortuneItem>? _itemList;
+  List<AutoSizeText>? _itemTextList;
 
   double? _screenWidth;
 
@@ -27,46 +29,7 @@ class _CreateWheelPageState extends State<CreateWheelPage> {
     _question = "";
     _itemName = "";
     _itemList = [];
-
-    //_screenWidth = MediaQuery.of(context).size.width;
-  }
-
-  Widget _takeColorRow(String title) {
-    return Row(
-      children: [
-        Text(
-          title,
-          style: TextStyle(fontSize: 15, color: Colors.black),
-        ),
-        Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.black,
-            ),
-            borderRadius: BorderRadius.circular(5),
-            color: _itemColor,
-          ),
-          width: 20,
-          height: 20,
-        ),
-        IconButton(
-          color: Colors.white,
-          icon: Icon(Icons.color_lens, color: Colors.black),
-          onPressed: () async {
-            _itemColor = await showDialog(
-              barrierDismissible: false,
-              context: context,
-              builder: (BuildContext context) {
-                return ShowColorPicker();
-              },
-            );
-            setState(() {
-              print("ffasdsadff" + _itemColor.toString());
-            });
-          },
-        ),
-      ],
-    );
+    _itemTextList = [];
   }
 
   final _text = TextEditingController();
@@ -122,7 +85,7 @@ class _CreateWheelPageState extends State<CreateWheelPage> {
             ),
             Container(
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -165,9 +128,15 @@ class _CreateWheelPageState extends State<CreateWheelPage> {
                                   color: Colors.white, fontSize: 30, fontFamily: "HelveticaComp"),
                               color: _itemColor!,
                             ),
-                            child: Text(_itemName),
+                            child: Text(_itemName!),
                           ),
                         );
+                        _itemTextList!.add(
+                          AutoSizeText(
+                          _itemName!,
+                          style: TextStyle(
+                              fontFamily: "PoeNewBold", fontSize: 50, fontWeight: FontWeight.bold),
+                        ));
                         setState(() {
                           _itemList!.length < 2 ? _validate = true : _validate = false;
                         });
@@ -188,11 +157,6 @@ class _CreateWheelPageState extends State<CreateWheelPage> {
                 padding: EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 15.0),
                 child: Container(
                   decoration: BoxDecoration(
-                    // boxShadow: [BoxShadow(
-                    //   color: Colors.grey,
-                    //   blurRadius: 10,
-                    //   offset: Offset(0,1),
-                    // )],
                     borderRadius: BorderRadiusDirectional.circular(10),
                     color: Colors.white,
                   ),
@@ -213,16 +177,7 @@ class _CreateWheelPageState extends State<CreateWheelPage> {
                                   print(_itemList);
                                   setState(() {});
                                 }),
-                            title: Center(
-                              child: Text(
-                                _itemList![index]
-                                    .child
-                                    .toString()
-                                    .substring(6, _itemList![index].child.toString().length - 2)
-                                    .toUpperCase(),
-                                style: TextStyle(fontSize: 30, color: Colors.white),
-                              ),
-                            ),
+                            title: Center(child: _itemTextList![index]),
                           ),
                         ),
                       );
@@ -235,18 +190,60 @@ class _CreateWheelPageState extends State<CreateWheelPage> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: MediaQuery.of(context).viewInsets.bottom == 0.0 ? FloatingActionButton.extended(
-        label: Text("Create Wheel"),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-        onPressed: () {
-          _itemList!.length < 2 ? _validate = true : _validate = false;
-          if (_validate == false) {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => WheelPage(_question, _itemList)));
-          }
-          setState(() {});
-        },
-      ) : null,
+      floatingActionButton: MediaQuery.of(context).viewInsets.bottom == 0.0
+          ? FloatingActionButton.extended(
+              label: Text("Create Wheel"),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+              onPressed: () {
+                _itemList!.length < 2 ? _validate = true : _validate = false;
+                if (_validate == false) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => WheelPage(_question, _itemList, _itemTextList)));
+                }
+                setState(() {});
+              },
+            )
+          : null,
+    );
+  }
+
+  Widget _takeColorRow(String title) {
+    return Row(
+      children: [
+        Text(
+          title,
+          style: TextStyle(fontSize: 15, color: Colors.black),
+        ),
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.black,
+            ),
+            borderRadius: BorderRadius.circular(5),
+            color: _itemColor,
+          ),
+          width: 20,
+          height: 20,
+        ),
+        IconButton(
+          color: Colors.white,
+          icon: Icon(Icons.color_lens, color: Colors.black),
+          onPressed: () async {
+            _itemColor = await showDialog(
+              barrierDismissible: false,
+              context: context,
+              builder: (BuildContext context) {
+                return ShowColorPicker();
+              },
+            );
+            setState(() {
+              print("ffasdsadff" + _itemColor.toString());
+            });
+          },
+        ),
+      ],
     );
   }
 }

@@ -1,11 +1,13 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
 
 class ListConstants {
-
   List<FortuneItem> shouldList = [
     FortuneItem(
-      child: Text("YES"),
+      child: Text(
+        "YES",
+      ),
       style: FortuneItemStyle(
         borderWidth: 5,
         borderColor: Colors.white,
@@ -14,7 +16,9 @@ class ListConstants {
       ),
     ),
     FortuneItem(
-      child: Text("NO"),
+      child: Text(
+        "NO",
+      ),
       style: FortuneItemStyle(
         borderWidth: 5,
         borderColor: Colors.white,
@@ -23,10 +27,22 @@ class ListConstants {
       ),
     ),
   ];
+  List<AutoSizeText> shouldTextList = [
+    AutoSizeText(
+      "YES",
+      style: TextStyle(fontFamily: "PoeNewBold", fontSize: 50, fontWeight: FontWeight.bold),
+    ),
+    AutoSizeText(
+      "NO",
+      style: TextStyle(fontFamily: "PoeNewBold", fontSize: 50, fontWeight: FontWeight.bold),
+    ),
+  ];
 
   List<FortuneItem> drinkList = [
     FortuneItem(
-      child: Text("COCA COLA"),
+      child: Text(
+        "COCA COLA",
+      ),
       style: FortuneItemStyle(
         borderWidth: 5,
         borderColor: Colors.white,
@@ -35,7 +51,9 @@ class ListConstants {
       ),
     ),
     FortuneItem(
-      child: Text("STARBUCKS"),
+      child: Text(
+        "STARBUCKS",
+      ),
       style: FortuneItemStyle(
         borderWidth: 5,
         borderColor: Colors.white,
@@ -44,7 +62,9 @@ class ListConstants {
       ),
     ),
     FortuneItem(
-      child: Text("ORANGE JUICE"),
+      child: Text(
+        "ORANGE JUICE",
+      ),
       style: FortuneItemStyle(
         borderWidth: 5,
         borderColor: Colors.white,
@@ -53,7 +73,9 @@ class ListConstants {
       ),
     ),
     FortuneItem(
-      child: Text("MILKSHAKE"),
+      child: Text(
+        "MILKSHAKE",
+      ),
       style: FortuneItemStyle(
         borderWidth: 5,
         borderColor: Colors.white,
@@ -62,7 +84,9 @@ class ListConstants {
       ),
     ),
     FortuneItem(
-      child: Text("PEPSI"),
+      child: Text(
+        "PEPSI",
+      ),
       style: FortuneItemStyle(
         borderWidth: 5,
         borderColor: Colors.white,
@@ -71,7 +95,9 @@ class ListConstants {
       ),
     ),
     FortuneItem(
-      child: Text("SPRITE"),
+      child: Text(
+        "SPRITE",
+      ),
       style: FortuneItemStyle(
         borderWidth: 5,
         borderColor: Colors.white,
@@ -80,7 +106,9 @@ class ListConstants {
       ),
     ),
     FortuneItem(
-      child: Text("FANTA"),
+      child: Text(
+        "FANTA",
+      ),
       style: FortuneItemStyle(
         borderWidth: 5,
         borderColor: Colors.white,
@@ -89,7 +117,9 @@ class ListConstants {
       ),
     ),
     FortuneItem(
-      child: Text("RED BULL"),
+      child: Text(
+        "RED BULL",
+      ),
       style: FortuneItemStyle(
         borderWidth: 5,
         borderColor: Colors.white,
@@ -98,7 +128,9 @@ class ListConstants {
       ),
     ),
     FortuneItem(
-      child: Text("ICE TEA"),
+      child: Text(
+        "ICE TEA",
+      ),
       style: FortuneItemStyle(
         borderWidth: 5,
         borderColor: Colors.white,
@@ -108,9 +140,50 @@ class ListConstants {
     ),
   ];
 
+  List<AutoSizeText> drinksTextList = [
+    AutoSizeText(
+      "COCA COLA",
+      style: TextStyle(fontFamily: "PoeNewBold", fontSize: 50, fontWeight: FontWeight.bold),
+    ),
+    AutoSizeText(
+      "STARBUCKS",
+      style: TextStyle(fontFamily: "PoeNewBold", fontSize: 50, fontWeight: FontWeight.bold),
+    ),
+    AutoSizeText(
+      "ORANGE JUICE",
+      style: TextStyle(fontFamily: "PoeNewBold", fontSize: 50, fontWeight: FontWeight.bold),
+    ),
+    AutoSizeText(
+      "MILKSHAKE",
+      style: TextStyle(fontFamily: "PoeNewBold", fontSize: 50, fontWeight: FontWeight.bold),
+    ),
+    AutoSizeText(
+      "PEPSI",
+      style: TextStyle(fontFamily: "PoeNewBold", fontSize: 50, fontWeight: FontWeight.bold),
+    ),
+    AutoSizeText(
+      "SPRITE",
+      style: TextStyle(fontFamily: "PoeNewBold", fontSize: 50, fontWeight: FontWeight.bold),
+    ),
+    AutoSizeText(
+      "FANTA",
+      style: TextStyle(fontFamily: "PoeNewBold", fontSize: 50, fontWeight: FontWeight.bold),
+    ),
+    AutoSizeText(
+      "RED BULL",
+      style: TextStyle(fontFamily: "PoeNewBold", fontSize: 50, fontWeight: FontWeight.bold),
+    ),
+    AutoSizeText(
+      "ICE TEA",
+      style: TextStyle(fontFamily: "PoeNewBold", fontSize: 50, fontWeight: FontWeight.bold),
+    ),
+  ];
+
   List<FortuneItem> cuisinesList = [
     FortuneItem(
-      child: Text("TURKISH"),
+      child: Text(
+        "TURKISH",
+      ),
       style: FortuneItemStyle(
         borderWidth: 5,
         borderColor: Colors.white,
@@ -119,7 +192,9 @@ class ListConstants {
       ),
     ),
     FortuneItem(
-      child: Text("INDIAN"),
+      child: Text(
+        "INDIAN",
+      ),
       style: FortuneItemStyle(
         borderWidth: 5,
         borderColor: Colors.white,
@@ -128,7 +203,9 @@ class ListConstants {
       ),
     ),
     FortuneItem(
-      child: Text("KOREAN"),
+      child: Text(
+        "KOREAN",
+      ),
       style: FortuneItemStyle(
         borderWidth: 5,
         borderColor: Colors.white,
@@ -137,7 +214,9 @@ class ListConstants {
       ),
     ),
     FortuneItem(
-      child: Text("ITALIAN"),
+      child: Text(
+        "ITALIAN",
+      ),
       style: FortuneItemStyle(
         borderWidth: 5,
         borderColor: Colors.white,
@@ -146,7 +225,9 @@ class ListConstants {
       ),
     ),
     FortuneItem(
-      child: Text("CHINESE"),
+      child: Text(
+        "CHINESE",
+      ),
       style: FortuneItemStyle(
         borderWidth: 5,
         borderColor: Colors.white,
@@ -155,7 +236,9 @@ class ListConstants {
       ),
     ),
     FortuneItem(
-      child: Text("GREEK"),
+      child: Text(
+        "GREEK",
+      ),
       style: FortuneItemStyle(
         borderWidth: 5,
         borderColor: Colors.white,
@@ -164,7 +247,9 @@ class ListConstants {
       ),
     ),
     FortuneItem(
-      child: Text("MEXICAN"),
+      child: Text(
+        "MEXICAN",
+      ),
       style: FortuneItemStyle(
         borderWidth: 5,
         borderColor: Colors.white,
@@ -174,9 +259,42 @@ class ListConstants {
     ),
   ];
 
+  List<AutoSizeText> cuisineTextList = [
+    AutoSizeText(
+      "TURKISH",
+      style: TextStyle(fontFamily: "PoeNewBold", fontSize: 50, fontWeight: FontWeight.bold),
+    ),
+    AutoSizeText(
+      "INDIAN",
+      style: TextStyle(fontFamily: "PoeNewBold", fontSize: 50, fontWeight: FontWeight.bold),
+    ),
+    AutoSizeText(
+      "KOREAN",
+      style: TextStyle(fontFamily: "PoeNewBold", fontSize: 50, fontWeight: FontWeight.bold),
+    ),
+    AutoSizeText(
+      "ITALIAN",
+      style: TextStyle(fontFamily: "PoeNewBold", fontSize: 50, fontWeight: FontWeight.bold),
+    ),
+    AutoSizeText(
+      "CHINESE",
+      style: TextStyle(fontFamily: "PoeNewBold", fontSize: 50, fontWeight: FontWeight.bold),
+    ),
+    AutoSizeText(
+      "GREEK",
+      style: TextStyle(fontFamily: "PoeNewBold", fontSize: 50, fontWeight: FontWeight.bold),
+    ),
+    AutoSizeText(
+      "MEXICAN",
+      style: TextStyle(fontFamily: "PoeNewBold", fontSize: 50, fontWeight: FontWeight.bold),
+    ),
+  ];
+
   List<FortuneItem> foodsList = [
     FortuneItem(
-      child: Text("MCDONALD'S"),
+      child: Text(
+        "MCDONALD'S",
+      ),
       style: FortuneItemStyle(
         borderWidth: 5,
         borderColor: Colors.white,
@@ -185,7 +303,9 @@ class ListConstants {
       ),
     ),
     FortuneItem(
-      child: Text("Burger King".toUpperCase()),
+      child: Text(
+        "BURGER KING",
+      ),
       style: FortuneItemStyle(
         borderWidth: 5,
         borderColor: Colors.white,
@@ -194,7 +314,9 @@ class ListConstants {
       ),
     ),
     FortuneItem(
-      child: Text("Arby's".toUpperCase()),
+      child: Text(
+        "ARBY'S",
+      ),
       style: FortuneItemStyle(
         borderWidth: 5,
         borderColor: Colors.white,
@@ -203,7 +325,9 @@ class ListConstants {
       ),
     ),
     FortuneItem(
-      child: Text("Popeyes".toUpperCase()),
+      child: Text(
+        "POPEYES",
+      ),
       style: FortuneItemStyle(
         borderWidth: 5,
         borderColor: Colors.white,
@@ -212,7 +336,9 @@ class ListConstants {
       ),
     ),
     FortuneItem(
-      child: Text("KFC".toUpperCase()),
+      child: Text(
+        "KFC",
+      ),
       style: FortuneItemStyle(
         borderWidth: 5,
         borderColor: Colors.white,
@@ -221,7 +347,9 @@ class ListConstants {
       ),
     ),
     FortuneItem(
-      child: Text("Subway".toUpperCase()),
+      child: Text(
+        "SUBWAY",
+      ),
       style: FortuneItemStyle(
         borderWidth: 5,
         borderColor: Colors.white,
@@ -230,7 +358,9 @@ class ListConstants {
       ),
     ),
     FortuneItem(
-      child: Text("Domino's Pizza".toUpperCase()),
+      child: Text(
+        "DOMINO'S PIZZA",
+      ),
       style: FortuneItemStyle(
         borderWidth: 5,
         borderColor: Colors.white,
@@ -239,13 +369,50 @@ class ListConstants {
       ),
     ),
     FortuneItem(
-      child: Text("Pizza Hut".toUpperCase()),
+      child: Text(
+        "PIZZA HUT",
+      ),
       style: FortuneItemStyle(
         borderWidth: 5,
         borderColor: Colors.white,
         color: Colors.purple,
         textStyle: TextStyle(color: Colors.white, fontSize: 30, fontFamily: "HelveticaComp"),
       ),
+    ),
+  ];
+
+  List<AutoSizeText> foodsTextList = [
+    AutoSizeText(
+      "MCDONALD'S",
+      style: TextStyle(fontFamily: "PoeNewBold", fontSize: 50, fontWeight: FontWeight.bold),
+    ),
+    AutoSizeText(
+      "BURGER KING",
+      style: TextStyle(fontFamily: "PoeNewBold", fontSize: 50, fontWeight: FontWeight.bold),
+    ),
+    AutoSizeText(
+      "ARBY'S",
+      style: TextStyle(fontFamily: "PoeNewBold", fontSize: 50, fontWeight: FontWeight.bold),
+    ),
+    AutoSizeText(
+      "POPEYES",
+      style: TextStyle(fontFamily: "PoeNewBold", fontSize: 50, fontWeight: FontWeight.bold),
+    ),
+    AutoSizeText(
+      "KFC",
+      style: TextStyle(fontFamily: "PoeNewBold", fontSize: 50, fontWeight: FontWeight.bold),
+    ),
+    AutoSizeText(
+      "SUBWAY",
+      style: TextStyle(fontFamily: "PoeNewBold", fontSize: 50, fontWeight: FontWeight.bold),
+    ),
+    AutoSizeText(
+      "DOMINO'S PIZZA",
+      style: TextStyle(fontFamily: "PoeNewBold", fontSize: 50, fontWeight: FontWeight.bold),
+    ),
+    AutoSizeText(
+      "PIZZA HUT",
+      style: TextStyle(fontFamily: "PoeNewBold", fontWeight: FontWeight.bold),
     ),
   ];
 }
