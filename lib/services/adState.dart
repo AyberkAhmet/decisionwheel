@@ -2,29 +2,64 @@ import 'dart:io';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
+const int maxFailedLoadAttempts = 3;
+
 class AdState {
   Future<InitializationStatus> initialization;
+  InterstitialAd? _interstitialAd;
+  int _numInterstitialLoadAttempts = 0;
 
   AdState(this.initialization);
-
+  // android : ca-app-pub-4619250431619647/4879032176
+  //ios: ca-app-pub-4619250431619647/6964767281
   String get interstitialAdUnitId => Platform.isAndroid
-      ? "ca-app-pub-4619250431619647/4879032176"
-      : "ca-app-pub-4619250431619647/6964767281";
+      ? "ca-app-pub-3940256099942544/1033173712"
+      : "ca-app-pub-3940256099942544/4411468910";
 
-  AdListener get adListener => _adListener;
+  void createInterstitialAd() {
+    InterstitialAd.load(
+        adUnitId: interstitialAdUnitId,
+        request: AdRequest(
+          nonPersonalizedAds: true
+        ),
+        adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: (InterstitialAd ad) {
+            print('$ad loaded');
+            _interstitialAd = ad;
+            _numInterstitialLoadAttempts = 0;
+            _interstitialAd!.setImmersiveMode(true);
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            print('InterstitialAd failed to load: $error.');
+            _numInterstitialLoadAttempts += 1;
+            _interstitialAd = null;
+            if (_numInterstitialLoadAttempts <= maxFailedLoadAttempts) {
+              createInterstitialAd();
+            }
+          },
+        ));
+  }
 
-  final AdListener _adListener = AdListener(
-  // Called when an ad is successfully received.
-  onAdLoaded: (Ad ad) => print('Ad loaded.'),
-  // Called when an ad request failed.
-  onAdFailedToLoad: (Ad ad, LoadAdError error) {
-    print('Ad failed to load: $error');
-  },
-  // Called when an ad opens an overlay that covers the screen.
-  onAdOpened: (Ad ad) => print('Ad opened.'),
-  // Called when an ad removes an overlay that covers the screen.
-  onAdClosed: (Ad ad) => print('Ad closed.'),
-  // Called when an ad is in the process of leaving the application.
-  onApplicationExit: (Ad ad) => print('Left application.'),
-);
+  void showInterstitialAd() {
+    if (_interstitialAd == null) {
+      print('Warning: attempt to show interstitial before loaded.');
+      return;
+    }
+    _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (InterstitialAd ad) =>
+          print('ad onAdShowedFullScreenContent.'),
+      onAdDismissedFullScreenContent: (InterstitialAd ad) {
+        print('$ad onAdDismissedFullScreenContent.');
+        ad.dispose();
+        createInterstitialAd();
+      },
+      onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
+        print('$ad onAdFailedToShowFullScreenContent: $error');
+        ad.dispose();
+        createInterstitialAd();
+      },
+    );
+    _interstitialAd!.show();
+    _interstitialAd = null;
+  }
 }

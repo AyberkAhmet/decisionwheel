@@ -1,9 +1,9 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:spinner/models/colorConstants.dart';
 import 'package:spinner/services/adState.dart';
@@ -22,7 +22,7 @@ class WheelPage extends StatefulWidget {
 class _WheelPageState extends State<WheelPage> {
   int selected = 0;
   bool showText = false;
-  InterstitialAd? interstitialAd;
+  StreamController<int> controller = StreamController<int>();
 
   @override
   void didChangeDependencies() {
@@ -30,11 +30,7 @@ class _WheelPageState extends State<WheelPage> {
     final adState = Provider.of<AdState>(context);
     adState.initialization.then((status) {
       setState(() {
-        interstitialAd = InterstitialAd(
-            adUnitId: adState.interstitialAdUnitId,
-            listener: adState.adListener,
-            request: AdRequest())
-          ..load();
+        adState.createInterstitialAd();
       });
     });
   }
@@ -45,8 +41,15 @@ class _WheelPageState extends State<WheelPage> {
     showText = false;
   }
 
+  void dispose() {
+    controller.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final adState = Provider.of<AdState>(context);
+
     ColorConstants _colorConstants = ColorConstants();
     String selectedText = widget._itemList![selected].child.toString();
     print(selectedText);
@@ -98,23 +101,28 @@ class _WheelPageState extends State<WheelPage> {
                           height: MediaQuery.of(context).size.width + 200,
                           decoration: BoxDecoration(
                             color: Color.fromRGBO(233, 233, 233, 1),
-                            border: Border.all(width: 1, color: Color.fromRGBO(233, 233, 233, 1)),
-                            borderRadius:
-                                BorderRadius.circular(MediaQuery.of(context).size.width + 100),
+                            border: Border.all(
+                                width: 1,
+                                color: Color.fromRGBO(233, 233, 233, 1)),
+                            borderRadius: BorderRadius.circular(
+                                MediaQuery.of(context).size.width + 100),
                           ),
                           child: Container(
                             padding: EdgeInsets.all(20),
                             decoration: BoxDecoration(
                               color: Color.fromRGBO(226, 226, 226, 1),
-                              border: Border.all(width: 1, color: Color.fromRGBO(226, 226, 226, 1)),
+                              border: Border.all(
+                                  width: 1,
+                                  color: Color.fromRGBO(226, 226, 226, 1)),
                               borderRadius: BorderRadius.circular(300),
                             ),
                             child: Container(
                               padding: EdgeInsets.all(20),
                               decoration: BoxDecoration(
                                 color: Color.fromRGBO(219, 219, 219, 1),
-                                border:
-                                    Border.all(width: 1, color: Color.fromRGBO(219, 219, 219, 1)),
+                                border: Border.all(
+                                    width: 1,
+                                    color: Color.fromRGBO(219, 219, 219, 1)),
                                 borderRadius: BorderRadius.circular(300),
                               ),
                               child: Stack(
@@ -122,10 +130,10 @@ class _WheelPageState extends State<WheelPage> {
                                 children: [
                                   FortuneWheel(
                                     animateFirst: false,
-                                    selected: selected,
+                                    selected: controller.stream,
                                     onAnimationEnd: () {
                                       setState(() {
-                                        interstitialAd!.show();
+                                        adState.showInterstitialAd();
                                         showText = true;
                                       });
                                     },
@@ -135,7 +143,8 @@ class _WheelPageState extends State<WheelPage> {
                                         child: Container(
                                           width: 80,
                                           height: 80,
-                                          child: Image.asset("assets/indic.png"),
+                                          child:
+                                              Image.asset("assets/indic.png"),
                                         ),
                                       ),
                                     ],
@@ -148,8 +157,12 @@ class _WheelPageState extends State<WheelPage> {
                                         "assets/spin.png",
                                       ),
                                       onPressed: () {
-                                        setState(() {
-                                          selected = Random().nextInt(widget._itemList!.length);
+                                        setState(() async{
+                                          controller.add(
+                                            Fortune.randomInt(
+                                                0, widget._itemList!.length),
+                                          );
+                                          selected = await controller.stream.last;
                                           showText = false;
                                         });
                                       },
