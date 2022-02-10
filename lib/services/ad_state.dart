@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:io';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -19,9 +21,7 @@ class AdState {
   void createInterstitialAd() {
     InterstitialAd.load(
         adUnitId: interstitialAdUnitId,
-        request: AdRequest(
-          nonPersonalizedAds: true
-        ),
+        request: const AdRequest(nonPersonalizedAds: true),
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (InterstitialAd ad) {
             print('$ad loaded');

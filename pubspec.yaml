@@ -33,8 +33,13 @@ dependencies:
   google_mobile_ads: ^1.0.1
   provider: ^6.0.2
   auto_size_text: ^3.0.0
+  url_launcher: ^6.0.18
+  feedback: ^2.4.1
+  flutter_email_sender: ^5.0.2
+  path_provider: ^2.0.8
 
 dev_dependencies:
+  flutter_lints: ^1.0.4
   flutter_test:
     sdk: flutter
 
@@ -54,6 +59,7 @@ flutter:
     - assets/return_button.jpg
     - assets/indic.png
     - assets/spin.png
+    - assets/buy_me_coffee.png
     
 
   # An image asset can refer to one or more resolution-specific "variants", see
