@@ -9,6 +9,7 @@ import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:spinner/extensions/context_extension.dart';
 import 'package:spinner/utils/constants/string_constants.dart';
+import 'package:spinner/views/settingsPages/other_apps_page.dart';
 import 'package:spinner/widgets/settingsPageWidgets/setting_menu_item_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -63,13 +64,28 @@ class SettingsPage extends StatelessWidget {
                 title: feedbackButtonTitle,
               ),
               SettingMenuItemButton(
-                onpressed: () {},
+                onpressed: () {
+                  final snackBar = SnackBar(
+                    content: const Text('Remove Ads unavailable!'),
+                    action: SnackBarAction(
+                      label: 'OK',
+                      onPressed: () {},
+                    ),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                },
                 icon: Icons.do_not_disturb,
                 iconColor: Colors.red,
                 title: removeAdsButtonTitle,
               ),
               SettingMenuItemButton(
-                onpressed: () {},
+                onpressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => OtherAppsPage(),
+                      ));
+                },
                 icon: Icons.apps,
                 iconColor: Colors.blue,
                 title: otherAppsButtonTitle,
@@ -81,7 +97,7 @@ class SettingsPage extends StatelessWidget {
             child: ElevatedButton(
                 onPressed: () => _launchURL(buyMeCoffeeUrl),
                 child: Image.asset(buyMeCoffeeImageUrl)),
-          )
+          ),
         ],
       ),
     );

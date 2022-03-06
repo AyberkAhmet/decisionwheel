@@ -3,16 +3,11 @@ import 'package:spinner/extensions/context_extension.dart';
 import 'package:spinner/models/home_menu_item_model.dart';
 import 'package:spinner/utils/constants/style_constants.dart';
 
-class HomeMenuItemButton extends StatefulWidget {
+class HomeMenuItemButton extends StatelessWidget {
   final HomeMenuItemModel homeMenuItemModel;
   const HomeMenuItemButton(this.homeMenuItemModel, {Key? key})
       : super(key: key);
 
-  @override
-  _HomeMenuItemButtonState createState() => _HomeMenuItemButtonState();
-}
-
-class _HomeMenuItemButtonState extends State<HomeMenuItemButton> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -28,12 +23,11 @@ class _HomeMenuItemButtonState extends State<HomeMenuItemButton> {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    widget.homeMenuItemModel.navigatePageName),
+                builder: (context) => homeMenuItemModel.navigatePageName),
           );
         },
         child: Text(
-          widget.homeMenuItemModel.title,
+          homeMenuItemModel.title,
           style: context.theme.primaryTextTheme.headline5,
           textAlign: TextAlign.center,
         ),

@@ -177,7 +177,7 @@ class _WheelPageState extends State<WheelPage> {
           spinIconImageUrl,
         ),
         onPressed: () {
-          setState(() async {
+          setState(() {
             int _randInt =
                 Fortune.randomInt(0, widget.wheelModel.fortuneItems.length);
             controller.add(_randInt);

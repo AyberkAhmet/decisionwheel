@@ -30,8 +30,8 @@
     </intent>
     </queries>
     <application
-        android:name="io.flutter.app.FlutterApplication"
-        android:label="spinner"
+        android:name="${applicationName}"
+        android:label="Decision Spinner"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
