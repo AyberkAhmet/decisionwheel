@@ -1,8 +1,11 @@
+import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
-import 'package:spinner/services/adState.dart';
-import 'package:spinner/views/homePage.dart';
+import 'package:spinner/services/ad_state.dart';
+import 'package:spinner/theme/custom_theme.dart';
+import 'package:spinner/utils/constants/string_constants.dart';
+import 'package:spinner/views/home_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,23 +14,23 @@ void main() {
   runApp(
     Provider.value(
       value: adState,
-      builder: (context, child) => MyApp(),
+      builder: (context, child) => const MyApp(),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+    return BetterFeedback(
+      child: MaterialApp(
+        title: materialAppTitle,
+        debugShowCheckedModeBanner: false,
+        theme: customTheme,
+        home: const HomePage(),
       ),
-      home: HomePage(),
     );
   }
 }
