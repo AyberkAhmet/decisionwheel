@@ -12,8 +12,7 @@ class AdState {
   int _numInterstitialLoadAttempts = 0;
 
   AdState(this.initialization);
-  // android : ca-app-pub-4619250431619647/4879032176
-  //ios: ca-app-pub-4619250431619647/6964767281
+
   String get interstitialAdUnitId => Platform.isAndroid
       ? "ca-app-pub-3940256099942544/1033173712"
       : "ca-app-pub-3940256099942544/4411468910";
