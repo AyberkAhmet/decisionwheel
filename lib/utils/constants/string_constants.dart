@@ -14,7 +14,7 @@ const String helveticaFontFamily = "HelveticaComp";
 const String poeFontFamily = "PoeNewBold";
 
 //Home Page Menu Button Titles
-const String sholdITitle = "SHOULD I ...?";
+const String shouldITitle = "SHOULD I ...?";
 const String drinksTitle = "DRINKS";
 const String foodsTitle = "FOODS";
 const String cuisinesTitle = "CUISINES";
