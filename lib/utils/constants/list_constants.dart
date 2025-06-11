@@ -87,7 +87,7 @@ WheelModel foodsWheelModel =
 
 List<HomeMenuItemModel> homeMenuItems = [
   HomeMenuItemModel(
-      title: sholdITitle, navigatePageName: WheelPage(shouldWheelModel)),
+      title: shouldITitle, navigatePageName: WheelPage(shouldWheelModel)),
   HomeMenuItemModel(
       title: drinksTitle, navigatePageName: WheelPage(drinksWheelModel)),
   HomeMenuItemModel(
