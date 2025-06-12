@@ -32,9 +32,8 @@ class _WheelPageState extends State<WheelPage> {
     super.didChangeDependencies();
     final adState = Provider.of<AdState>(context);
     adState.initialization.then((status) {
-      setState(() {
-        adState.createInterstitialAd();
-      });
+      if (!mounted) return;
+      adState.createInterstitialAd();
     });
   }
 
